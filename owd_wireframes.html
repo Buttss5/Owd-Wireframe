@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OWD – Wireframe Screens</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#E8E8E8;padding:40px;color:#111}
+
+/* ── canvas header ── */
+.canvas-header{margin-bottom:32px}
+.canvas-title{font-size:22px;font-weight:700;color:#111;letter-spacing:-.02em}
+.canvas-sub{font-size:13px;color:#666;margin-top:4px}
+
+/* ── legend ── */
+.legend{display:flex;flex-wrap:wrap;gap:16px;padding:14px 18px;background:#fff;border:1.5px solid #C8C8C8;border-radius:6px;margin-bottom:28px}
+.legend-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.07em;width:100%;margin-bottom:4px}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:#444}
+.l-box{width:20px;height:14px;border-radius:2px;flex-shrink:0}
+.l-solid{background:#C8C8C8;border:1.5px solid #999}
+.l-dashed{background:#F0F0F0;border:1.5px dashed #999}
+.l-dark{background:#444;border:1.5px solid #333}
+.l-line{width:20px;height:2px;background:#999;border-radius:1px}
+.l-circle{width:14px;height:14px;border-radius:50%;background:#C8C8C8;border:1.5px solid #999}
+.l-label{width:20px;height:14px;border-radius:2px;background:#fff;border:1.5px solid #999;font-size:9px;font-weight:700;color:#555;display:flex;align-items:center;justify-content:center}
+
+/* ── screen grid ── */
+.screen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+
+/* ── screen card ── */
+.screen-wrap{display:flex;flex-direction:column;gap:8px}
+.screen-label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.07em}
+.screen-name{font-size:13px;font-weight:600;color:#222;margin-top:1px}
+.frame{width:100%;background:#F7F7F7;border:1.5px solid #BBBBBB;border-radius:4px;overflow:hidden;position:relative}
+
+/* ── wireframe primitives ── */
+.wf-topbar{height:36px;background:#444;display:flex;align-items:center;padding:0 10px;gap:8px;flex-shrink:0}
+.wf-logo-circle{width:22px;height:22px;border-radius:50%;background:#777;flex-shrink:0}
+.wf-title-block{width:90px;height:10px;background:#777;border-radius:2px}
+.wf-tab-group{display:flex;gap:4px;margin-left:auto}
+.wf-tab{height:18px;border-radius:3px;background:#666}
+.wf-tab.active-tab{background:#D0D0D0}
+
+.wf-body{display:flex;flex:1;min-height:0}
+.wf-sidebar{background:#EBEBEB;border-right:1.5px solid #CCCCCC;padding:8px 6px;flex-shrink:0}
+.wf-sidebar-sec{margin-bottom:8px}
+.wf-sidebar-label{height:6px;background:#BBBBBB;border-radius:2px;margin-bottom:5px;width:55%}
+.wf-sidebar-item{height:20px;border-radius:3px;display:flex;align-items:center;padding:0 6px;gap:5px;margin-bottom:3px}
+.wf-sidebar-item.active-item{background:#D4D4D4}
+.wf-sidebar-icon{width:9px;height:9px;border-radius:1px;background:#999;flex-shrink:0}
+.wf-sidebar-text{height:6px;border-radius:2px;background:#BBBBBB;flex:1}
+
+.wf-content{flex:1;padding:10px;background:#F7F7F7;overflow:hidden}
+
+/* content blocks */
+.wf-page-title{height:10px;background:#333;border-radius:2px;width:50%;margin-bottom:5px}
+.wf-page-sub{height:6px;background:#CCCCCC;border-radius:2px;width:70%;margin-bottom:10px}
+.wf-card{background:#fff;border:1.5px solid #DDDDDD;border-radius:4px;padding:8px;margin-bottom:8px}
+.wf-card-title{height:7px;background:#444;border-radius:2px;width:40%;margin-bottom:7px}
+.wf-card-sub{height:5px;background:#CCCCCC;border-radius:2px;width:90%;margin-bottom:3px}
+.wf-line{height:5px;background:#E0E0E0;border-radius:2px;margin-bottom:4px}
+.wf-line.dark{background:#C8C8C8}
+.wf-line.med{background:#D4D4D4}
+.wf-btn-row{display:flex;gap:5px;margin-top:6px;justify-content:flex-end}
+.wf-btn{height:16px;border-radius:3px;background:#CCCCCC}
+.wf-btn.primary{background:#555}
+.wf-stat-grid{display:grid;gap:5px;margin-bottom:8px}
+.wf-stat-card{background:#fff;border:1.5px solid #DDD;border-radius:4px;padding:6px}
+.wf-stat-val{height:14px;background:#888;border-radius:2px;width:40%;margin-bottom:4px}
+.wf-stat-lbl{height:5px;background:#DDDDDD;border-radius:2px;width:70%}
+.wf-two-col{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+.wf-three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px}
+.wf-four-col{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:8px}
+.wf-table-head{display:flex;gap:4px;padding:4px 5px;background:#EEEEEE;border-radius:2px 2px 0 0;border:1px solid #DDD;border-bottom:none}
+.wf-table-head-cell{height:5px;background:#BBBBBB;border-radius:1px;flex:1}
+.wf-table-row{display:flex;gap:4px;padding:5px 5px;border:1px solid #DDD;border-top:none}
+.wf-table-row:last-child{border-radius:0 0 2px 2px}
+.wf-table-row:nth-child(odd){background:#FAFAFA}
+.wf-table-cell{height:5px;background:#E0E0E0;border-radius:1px;flex:1}
+.wf-table-cell.dark{background:#CCCCCC}
+.wf-badge{height:10px;width:36px;border-radius:8px;background:#CCCCCC;flex-shrink:0}
+.wf-divider{height:1px;background:#E0E0E0;margin:6px 0}
+.wf-form-row{display:grid;gap:5px;margin-bottom:5px}
+.wf-form-field{background:#F5F5F5;border:1px solid #DDD;border-radius:3px;height:16px;padding:0 5px;display:flex;align-items:center}
+.wf-field-line{height:5px;background:#DDDDDD;border-radius:1px;width:60%}
+.wf-label-line{height:5px;background:#BBBBBB;border-radius:1px;width:40%;margin-bottom:3px}
+.wf-checkbox-group{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.wf-checkbox{height:14px;padding:0 7px;border:1px solid #CCC;border-radius:3px;background:#fff;display:flex;align-items:center;gap:4px}
+.wf-check-sq{width:7px;height:7px;border:1px solid #AAA;border-radius:1px;flex-shrink:0}
+.wf-check-lbl{height:5px;background:#CCCCCC;border-radius:1px;width:28px}
+.wf-sig-box{border:1.5px dashed #CCCCCC;border-radius:3px;padding:6px;text-align:center}
+.wf-sig-name{height:6px;background:#888;border-radius:1px;width:60%;margin:0 auto 3px}
+.wf-sig-pos{height:5px;background:#DDDDDD;border-radius:1px;width:75%;margin:0 auto 2px}
+.wf-avatar{width:30px;height:30px;border-radius:50%;background:#BBBBBB;flex-shrink:0}
+.wf-bar-chart{display:flex;align-items:flex-end;gap:4px;height:50px;margin:6px 0}
+.wf-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.wf-bar{border-radius:2px 2px 0 0;width:100%;background:#CCCCCC}
+.wf-bar-lbl{height:4px;background:#DDDDDD;border-radius:1px;width:90%}
+.wf-prog-row{margin-bottom:5px}
+.wf-prog-track{height:6px;background:#EEEEEE;border-radius:3px;overflow:hidden;margin-top:3px}
+.wf-prog-fill{height:100%;border-radius:3px;background:#AAAAAA}
+.wf-prog-label{display:flex;justify-content:space-between}
+.wf-prog-text{height:5px;background:#CCCCCC;border-radius:1px;width:35%}
+.wf-notif-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #EEE}
+.wf-notif-text{height:5px;background:#DDDDDD;border-radius:1px;flex:1;margin-right:8px}
+.wf-toggle{width:20px;height:10px;border-radius:5px;background:#CCCCCC;flex-shrink:0}
+.wf-status-bar{display:flex;border:1px solid #DDD;border-radius:3px;overflow:hidden;margin-bottom:6px}
+.wf-status-step{flex:1;height:14px;background:#EEEEEE;border-right:1px solid #DDD;display:flex;align-items:center;justify-content:center}
+.wf-status-step:last-child{border-right:none}
+.wf-status-step.done{background:#D4D4D4}
+.wf-status-step.cur{background:#BBBBBB}
+.wf-step-text{height:5px;background:#AAAAAA;border-radius:1px;width:55%}
+.wf-tl-item{display:flex;gap:6px;margin-bottom:8px}
+.wf-tl-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid #AAAAAA;background:#EEEEEE;flex-shrink:0;margin-top:1px}
+.wf-tl-dot.done{background:#CCCCCC;border-color:#888}
+.wf-tl-content{flex:1}
+.wf-sat-opt{height:18px;border:1px solid #CCC;border-radius:3px;margin-bottom:4px;background:#FAFAFA;display:flex;align-items:center;padding:0 6px;gap:5px}
+.wf-sat-sq{width:8px;height:8px;border-radius:1px;background:#CCCCCC;flex-shrink:0}
+.wf-annot{position:absolute;background:#333;color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;letter-spacing:.03em;white-space:nowrap;z-index:10}
+
+/* ── properties table ── */
+.props-section{margin-top:48px}
+.props-title{font-size:16px;font-weight:700;margin-bottom:16px;color:#111}
+.props-table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:6px;overflow:hidden;border:1.5px solid #CCC}
+.props-table th{background:#444;color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.props-table td{padding:8px 12px;border-bottom:1px solid #E8E8E8;color:#333}
+.props-table tr:last-child td{border-bottom:none}
+.props-table tr:nth-child(even) td{background:#FAFAFA}
+.props-table .component{font-weight:600;color:#111}
+.props-table .screen-tag{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;background:#E8E8E8;color:#555;margin-right:3px}
+</style>
+</head>
+<body>
+
+<div class="canvas-header">
+  <div class="canvas-title">OWD — Web-Based Consumer Servicing System · Wireframes</div>
+  <div class="canvas-sub">12 screens across 3 portals · Grayscale wireframe · Ready for Figma import via "HTML to Figma" plugin</div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-title">Legend</div>
+  <div class="legend-item"><div class="l-box l-dark"></div> Page title / heading</div>
+  <div class="legend-item"><div class="l-box l-solid"></div> Card / container</div>
+  <div class="legend-item"><div class="l-box l-dashed"></div> Form field / input</div>
+  <div class="legend-item"><div class="l-line"></div> Body text / label line</div>
+  <div class="legend-item"><div class="l-circle"></div> Avatar / icon placeholder</div>
+  <div class="legend-item"><div class="l-label">BTN</div> Button (dark = primary)</div>
+</div>
+
+<!-- SCREENS GRID -->
+<div class="screen-grid">
+
+  <!-- ══ C-1: Consumer — File a Request ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">C-1 · Consumer Portal</div>
+    <div class="screen-name">File a Service Request</div>
+    <div class="frame" style="height:480px">
+      <!-- topbar -->
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div>
+        <div class="wf-title-block"></div>
+        <div class="wf-tab-group">
+          <div class="wf-tab active-tab" style="width:52px"></div>
+          <div class="wf-tab" style="width:38px"></div>
+          <div class="wf-tab" style="width:38px"></div>
+        </div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <!-- sidebar -->
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <!-- content -->
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-card">
+            <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:60%;margin-bottom:7px"></div>
+            <div class="wf-form-row" style="grid-template-columns:1fr 1fr">
+              <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+              <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+            </div>
+            <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line" style="width:80%"></div></div></div>
+            <div class="wf-form-row" style="grid-template-columns:1fr 1fr;margin-top:5px">
+              <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+              <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+            </div>
+            <div class="wf-divider"></div>
+            <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:50%;margin-bottom:7px"></div>
+            <div class="wf-checkbox-group">
+              ${Array(9).fill(0).map(()=>`<div class="wf-checkbox"><div class="wf-check-sq"></div><div class="wf-check-lbl"></div></div>`).join('')}
+            </div>
+            <div class="wf-divider"></div>
+            <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:45%;margin-bottom:7px"></div>
+            <div class="wf-three-col">
+              <div class="wf-sig-box"><div class="wf-sig-name"></div><div class="wf-sig-pos"></div><div class="wf-sig-pos"></div></div>
+              <div class="wf-sig-box"><div class="wf-sig-name"></div><div class="wf-sig-pos"></div><div class="wf-sig-pos"></div></div>
+              <div class="wf-sig-box"><div class="wf-sig-name"></div><div class="wf-sig-pos"></div><div class="wf-sig-pos"></div></div>
+            </div>
+            <div class="wf-btn-row">
+              <div class="wf-btn" style="width:45px"></div>
+              <div class="wf-btn primary" style="width:70px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">C-1</div>
+    </div>
+  </div>
+
+  <!-- ══ C-2: Consumer — My Requests ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">C-2 · Consumer Portal</div>
+    <div class="screen-name">My Requests (Track Status)</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab active-tab" style="width:52px"></div><div class="wf-tab" style="width:38px"></div><div class="wf-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-card">
+            <div class="wf-table-head">
+              ${Array(6).fill(0).map(()=>`<div class="wf-table-head-cell"></div>`).join('')}
+            </div>
+            ${Array(4).fill(0).map((_,i)=>`
+            <div class="wf-table-row">
+              <div class="wf-table-cell dark"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-badge"></div>
+              <div class="wf-badge"></div>
+              <div class="wf-btn" style="width:30px;height:12px;border-radius:2px"></div>
+            </div>`).join('')}
+          </div>
+          <!-- detail modal preview -->
+          <div class="wf-card" style="border:1.5px dashed #CCC">
+            <div class="wf-card-title" style="width:60%"></div>
+            <div class="wf-status-bar">
+              <div class="wf-status-step done"><div class="wf-step-text"></div></div>
+              <div class="wf-status-step done"><div class="wf-step-text"></div></div>
+              <div class="wf-status-step cur"><div class="wf-step-text"></div></div>
+              <div class="wf-status-step"><div class="wf-step-text"></div></div>
+            </div>
+            ${Array(3).fill(0).map(()=>`<div class="wf-tl-item"><div class="wf-tl-dot done"></div><div class="wf-tl-content"><div class="wf-line dark"></div><div class="wf-line" style="width:70%"></div></div></div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">C-2</div>
+    </div>
+  </div>
+
+  <!-- ══ C-3: Consumer — My Profile ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">C-3 · Consumer Portal</div>
+    <div class="screen-name">My Profile</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab active-tab" style="width:52px"></div><div class="wf-tab" style="width:38px"></div><div class="wf-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-two-col">
+            <div>
+              <div class="wf-card">
+                <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+                  <div class="wf-avatar"></div>
+                  <div style="flex:1"><div class="wf-line dark" style="width:65%;margin-bottom:4px"></div><div class="wf-line" style="width:50%"></div></div>
+                </div>
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                <div class="wf-form-row" style="grid-template-columns:1fr 1fr">
+                  <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+                  <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+                </div>
+                <div style="margin-top:4px"><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line" style="width:80%"></div></div></div>
+                <div class="wf-form-row" style="grid-template-columns:1fr 1fr;margin-top:4px">
+                  <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+                  <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+                </div>
+                <div class="wf-btn-row"><div class="wf-btn primary" style="width:65px"></div></div>
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:50%;margin-bottom:6px"></div>
+                ${Array(3).fill(0).map(()=>`<div><div class="wf-label-line"></div><div class="wf-form-field" style="margin-bottom:4px"><div class="wf-field-line" style="width:30%"></div></div></div>`).join('')}
+                <div class="wf-btn-row"><div class="wf-btn primary" style="width:65px"></div></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-card">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                ${Array(4).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #EEE"><div class="wf-line" style="width:40%;margin:0"></div><div class="wf-line dark" style="width:30%;margin:0"></div></div>`).join('')}
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                ${Array(3).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #EEE"><div class="wf-line" style="width:50%;margin:0"></div><div class="wf-line dark" style="width:20%;margin:0"></div></div>`).join('')}
+                <div class="wf-btn-row" style="margin-top:8px"><div class="wf-btn primary" style="width:100%;justify-content:center"></div></div>
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:65%;margin-bottom:6px"></div>
+                ${Array(3).fill(0).map(()=>`<div class="wf-notif-row"><div class="wf-notif-text"></div><div class="wf-toggle"></div></div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">C-3</div>
+    </div>
+  </div>
+
+  <!-- ══ S-1: Staff — Dashboard ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">S-1 · Staff Portal</div>
+    <div class="screen-name">Staff Dashboard</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab active-tab" style="width:38px"></div><div class="wf-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-stat-grid" style="grid-template-columns:1fr 1fr 1fr 1fr">
+            ${Array(4).fill(0).map(()=>`<div class="wf-stat-card"><div class="wf-stat-val"></div><div class="wf-stat-lbl"></div></div>`).join('')}
+          </div>
+          <div class="wf-two-col">
+            <div class="wf-card">
+              <div class="wf-card-title"></div>
+              ${Array(4).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #EEE">
+                <div style="flex:1"><div class="wf-line dark" style="width:40%;margin-bottom:3px"></div><div class="wf-line" style="width:70%"></div></div>
+                <div style="display:flex;gap:4px"><div class="wf-badge" style="width:28px"></div><div class="wf-btn" style="width:24px;height:12px;border-radius:2px"></div></div>
+              </div>`).join('')}
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-title"></div>
+              ${Array(4).fill(0).map(()=>`<div class="wf-tl-item"><div class="wf-tl-dot done"></div><div class="wf-tl-content"><div class="wf-line dark" style="margin-bottom:3px"></div><div class="wf-line" style="width:80%"></div></div></div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">S-1</div>
+    </div>
+  </div>
+
+  <!-- ══ S-2: Staff — Request Queue ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">S-2 · Staff Portal</div>
+    <div class="screen-name">Request Queue</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab active-tab" style="width:38px"></div><div class="wf-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-card" style="margin-bottom:8px">
+            <div style="display:flex;gap:5px">
+              <div class="wf-form-field" style="flex:1"><div class="wf-field-line" style="width:55%"></div></div>
+              <div class="wf-form-field" style="width:60px"><div class="wf-field-line"></div></div>
+              <div class="wf-btn" style="width:35px"></div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-table-head">
+              ${Array(8).fill(0).map(()=>`<div class="wf-table-head-cell"></div>`).join('')}
+            </div>
+            ${Array(5).fill(0).map(()=>`<div class="wf-table-row">
+              <div class="wf-table-cell dark"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-badge"></div>
+              <div class="wf-btn" style="width:28px;height:12px;border-radius:2px"></div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">S-2</div>
+    </div>
+  </div>
+
+  <!-- ══ S-3: Staff — Update & Findings ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">S-3 · Staff Portal</div>
+    <div class="screen-name">Update & Findings</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab active-tab" style="width:38px"></div><div class="wf-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          ${Array(2).fill(0).map(()=>`
+          <div class="wf-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+              <div><div class="wf-line dark" style="width:80px;margin-bottom:4px"></div><div class="wf-line" style="width:120px"></div></div>
+              <div class="wf-badge"></div>
+            </div>
+            <div><div class="wf-label-line"></div><div class="wf-form-field" style="height:28px;margin-bottom:5px"><div class="wf-field-line" style="width:40%"></div></div></div>
+            <div><div class="wf-label-line"></div><div class="wf-form-field" style="height:28px;margin-bottom:5px"><div class="wf-field-line" style="width:30%"></div></div></div>
+            <div class="wf-form-row" style="grid-template-columns:1fr 1fr">
+              <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+              <div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+            </div>
+            <div class="wf-btn-row">
+              <div class="wf-btn" style="width:45px"></div>
+              <div class="wf-btn primary" style="width:65px"></div>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">S-3</div>
+    </div>
+  </div>
+
+  <!-- ══ S-4: Staff — Profile ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">S-4 · Staff Portal</div>
+    <div class="screen-name">Staff Profile</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab active-tab" style="width:38px"></div><div class="wf-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            ${Array(3).fill(0).map(()=>`<div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>`).join('')}
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-two-col">
+            <div>
+              <div class="wf-card">
+                <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
+                  <div class="wf-avatar"></div>
+                  <div style="flex:1"><div class="wf-line dark" style="width:70%;margin-bottom:4px"></div><div class="wf-line" style="width:55%"></div></div>
+                </div>
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                <div class="wf-form-row" style="grid-template-columns:1fr 1fr 1fr">
+                  ${Array(3).fill(0).map(()=>`<div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>`).join('')}
+                </div>
+                <div class="wf-form-row" style="grid-template-columns:1fr 1fr;margin-top:4px">
+                  ${Array(2).fill(0).map(()=>`<div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>`).join('')}
+                </div>
+                <div style="margin-top:4px"><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line" style="width:80%"></div></div></div>
+                <div class="wf-btn-row"><div class="wf-btn primary" style="width:65px"></div></div>
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:50%;margin-bottom:6px"></div>
+                ${Array(3).fill(0).map(()=>`<div><div class="wf-label-line"></div><div class="wf-form-field" style="margin-bottom:4px"><div class="wf-field-line" style="width:30%"></div></div></div>`).join('')}
+                <div class="wf-btn-row"><div class="wf-btn primary" style="width:65px"></div></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-card">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                ${Array(4).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #EEE"><div class="wf-line" style="width:40%;margin:0"></div><div class="wf-line dark" style="width:30%;margin:0"></div></div>`).join('')}
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                ${Array(3).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #EEE"><div class="wf-line" style="width:50%;margin:0"></div><div class="wf-line dark" style="width:20%;margin:0"></div></div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">S-4</div>
+    </div>
+  </div>
+
+  <!-- ══ A-1: Admin — Analytics ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">A-1 · Admin Portal</div>
+    <div class="screen-name">Analytics Dashboard</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab" style="width:38px"></div><div class="wf-tab active-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            ${Array(2).fill(0).map(()=>`<div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>`).join('')}
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            ${Array(2).fill(0).map(()=>`<div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>`).join('')}
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-stat-grid" style="grid-template-columns:1fr 1fr 1fr 1fr;margin-bottom:8px">
+            ${Array(4).fill(0).map(()=>`<div class="wf-stat-card"><div class="wf-stat-val"></div><div class="wf-stat-lbl"></div><div class="wf-stat-lbl" style="width:50%;margin-top:3px"></div></div>`).join('')}
+          </div>
+          <div class="wf-two-col" style="margin-bottom:8px">
+            <div class="wf-card">
+              <div class="wf-card-title"></div>
+              <div class="wf-bar-chart">
+                ${[70,50,80,60,90].map(h=>`<div class="wf-bar-col"><div class="wf-bar" style="height:${h}%"></div><div class="wf-bar-lbl"></div></div>`).join('')}
+              </div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-title"></div>
+              ${Array(3).fill(0).map((_, i)=>`<div class="wf-prog-row">
+                <div class="wf-prog-label"><div class="wf-prog-text"></div><div class="wf-prog-text" style="width:20%"></div></div>
+                <div class="wf-prog-track"><div class="wf-prog-fill" style="width:${[70,25,15][i]}%"></div></div>
+              </div>`).join('')}
+            </div>
+          </div>
+          <div class="wf-two-col">
+            <div class="wf-card">
+              <div class="wf-card-title"></div>
+              <div class="wf-bar-chart">
+                ${[60,40,30,50,20,35,45].map(h=>`<div class="wf-bar-col"><div class="wf-bar" style="height:${h}%;background:#BBBBBB"></div><div class="wf-bar-lbl"></div></div>`).join('')}
+              </div>
+            </div>
+            <div class="wf-card">
+              <div class="wf-card-title"></div>
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+                <div style="text-align:center"><div style="height:24px;background:#888;border-radius:2px;width:40px;margin-bottom:3px"></div><div class="wf-line" style="width:40px"></div></div>
+                <div style="flex:1">
+                  ${Array(2).fill(0).map((_, i)=>`<div class="wf-prog-row">
+                    <div class="wf-prog-label"><div class="wf-prog-text"></div><div class="wf-prog-text" style="width:15%"></div></div>
+                    <div class="wf-prog-track"><div class="wf-prog-fill" style="width:${[75,25][i]}%"></div></div>
+                  </div>`).join('')}
+                </div>
+              </div>
+              <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:50%;margin-bottom:6px"></div>
+              ${Array(3).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #EEE"><div class="wf-line" style="width:45%;margin:0"></div><div class="wf-badge" style="width:30px"></div></div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">A-1</div>
+    </div>
+  </div>
+
+  <!-- ══ A-2: Admin — All Requests ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">A-2 · Admin Portal</div>
+    <div class="screen-name">All Service Requests</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab" style="width:38px"></div><div class="wf-tab active-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            ${Array(2).fill(0).map(()=>`<div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>`).join('')}
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-card" style="margin-bottom:8px">
+            <div style="display:flex;gap:5px">
+              <div class="wf-form-field" style="flex:1"><div class="wf-field-line"></div></div>
+              <div class="wf-form-field" style="width:60px"><div class="wf-field-line"></div></div>
+              <div class="wf-form-field" style="width:50px"><div class="wf-field-line"></div></div>
+              <div class="wf-btn" style="width:35px"></div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-table-head">
+              ${Array(9).fill(0).map(()=>`<div class="wf-table-head-cell"></div>`).join('')}
+            </div>
+            ${Array(5).fill(0).map(()=>`<div class="wf-table-row">
+              <div class="wf-table-cell dark"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-badge"></div>
+              <div class="wf-btn" style="width:25px;height:12px;border-radius:2px"></div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">A-2</div>
+    </div>
+  </div>
+
+  <!-- ══ A-3: Admin — Approval Queue ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">A-3 · Admin Portal</div>
+    <div class="screen-name">Approval Queue</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab" style="width:38px"></div><div class="wf-tab active-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            ${Array(2).fill(0).map(()=>`<div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>`).join('')}
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          ${Array(2).fill(0).map(()=>`
+          <div class="wf-card">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+              <div><div class="wf-line dark" style="width:100px;margin-bottom:4px"></div><div class="wf-line" style="width:140px;margin-bottom:3px"></div><div class="wf-line" style="width:120px"></div></div>
+              <div class="wf-badge"></div>
+            </div>
+            <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:45%;margin-bottom:6px"></div>
+            <div class="wf-three-col">
+              <div class="wf-sig-box"><div class="wf-sig-name"></div><div class="wf-sig-pos"></div><div class="wf-sig-pos"></div></div>
+              <div class="wf-sig-box"><div class="wf-sig-name"></div><div class="wf-sig-pos"></div><div class="wf-sig-pos"></div></div>
+              <div class="wf-sig-box"><div class="wf-sig-name"></div><div class="wf-sig-pos"></div><div class="wf-sig-pos"></div></div>
+            </div>
+            <div class="wf-btn-row">
+              <div class="wf-btn" style="width:38px;border-color:#999"></div>
+              <div class="wf-btn primary" style="width:70px"></div>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">A-3</div>
+    </div>
+  </div>
+
+  <!-- ══ A-4: Admin — User Accounts ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">A-4 · Admin Portal</div>
+    <div class="screen-name">User Accounts</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab" style="width:38px"></div><div class="wf-tab active-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            ${Array(2).fill(0).map(()=>`<div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>`).join('')}
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-card" style="margin-bottom:8px">
+            <div style="display:flex;gap:5px">
+              <div class="wf-form-field" style="flex:1"><div class="wf-field-line"></div></div>
+              <div class="wf-form-field" style="width:65px"><div class="wf-field-line"></div></div>
+              <div class="wf-form-field" style="width:55px"><div class="wf-field-line"></div></div>
+              <div class="wf-btn primary" style="width:50px"></div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <div class="wf-table-head">
+              ${Array(6).fill(0).map(()=>`<div class="wf-table-head-cell"></div>`).join('')}
+            </div>
+            ${Array(6).fill(0).map(()=>`<div class="wf-table-row">
+              <div class="wf-table-cell dark"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-badge"></div>
+              <div class="wf-table-cell"></div>
+              <div class="wf-badge"></div>
+              <div style="display:flex;gap:4px">
+                <div class="wf-btn" style="width:24px;height:12px;border-radius:2px"></div>
+                <div class="wf-btn" style="width:30px;height:12px;border-radius:2px;border-color:#999"></div>
+              </div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">A-4</div>
+    </div>
+  </div>
+
+  <!-- ══ A-5: Admin — Profile ══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">A-5 · Admin Portal</div>
+    <div class="screen-name">Admin Profile</div>
+    <div class="frame" style="height:480px">
+      <div class="wf-topbar">
+        <div class="wf-logo-circle"></div><div class="wf-title-block"></div>
+        <div class="wf-tab-group"><div class="wf-tab" style="width:52px"></div><div class="wf-tab" style="width:38px"></div><div class="wf-tab active-tab" style="width:38px"></div></div>
+      </div>
+      <div class="wf-body" style="height:444px">
+        <div class="wf-sidebar" style="width:80px">
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            ${Array(2).fill(0).map(()=>`<div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>`).join('')}
+          </div>
+          <div class="wf-sidebar-sec">
+            <div class="wf-sidebar-label"></div>
+            <div class="wf-sidebar-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+            <div class="wf-sidebar-item active-item"><div class="wf-sidebar-icon"></div><div class="wf-sidebar-text"></div></div>
+          </div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-page-title"></div>
+          <div class="wf-page-sub"></div>
+          <div class="wf-two-col">
+            <div>
+              <div class="wf-card">
+                <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
+                  <div class="wf-avatar"></div>
+                  <div style="flex:1"><div class="wf-line dark" style="width:70%;margin-bottom:4px"></div><div class="wf-line" style="width:55%"></div></div>
+                </div>
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                <div class="wf-form-row" style="grid-template-columns:1fr 1fr 1fr">
+                  ${Array(3).fill(0).map(()=>`<div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>`).join('')}
+                </div>
+                <div class="wf-form-row" style="grid-template-columns:1fr 1fr;margin-top:4px">
+                  ${Array(2).fill(0).map(()=>`<div><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>`).join('')}
+                </div>
+                <div style="margin-top:4px"><div class="wf-label-line"></div><div class="wf-form-field"><div class="wf-field-line"></div></div></div>
+                <div class="wf-btn-row"><div class="wf-btn primary" style="width:65px"></div></div>
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:50%;margin-bottom:6px"></div>
+                ${Array(3).fill(0).map(()=>`<div><div class="wf-label-line"></div><div class="wf-form-field" style="margin-bottom:4px"><div class="wf-field-line" style="width:30%"></div></div></div>`).join('')}
+                <div class="wf-btn-row"><div class="wf-btn primary" style="width:65px"></div></div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-card">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:55%;margin-bottom:6px"></div>
+                ${Array(4).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #EEE"><div class="wf-line" style="width:40%;margin:0"></div><div class="wf-line dark" style="width:30%;margin:0"></div></div>`).join('')}
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:50%;margin-bottom:6px"></div>
+                ${Array(4).fill(0).map(()=>`<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #EEE"><div class="wf-line" style="width:50%;margin:0"></div><div class="wf-line dark" style="width:15%;margin:0"></div></div>`).join('')}
+              </div>
+              <div class="wf-card" style="margin-top:0">
+                <div class="wf-card-sub" style="height:5px;background:#CCC;border-radius:1px;width:65%;margin-bottom:6px"></div>
+                ${Array(3).fill(0).map(()=>`<div class="wf-notif-row"><div class="wf-notif-text"></div><div class="wf-toggle"></div></div>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-annot" style="top:40px;right:8px">A-5</div>
+    </div>
+  </div>
+
+</div><!-- /screen-grid -->
+
+<!-- ══════════ FRAME PROPERTIES TABLE ══════════ -->
+<div class="props-section">
+  <div class="props-title">Frame & Component Properties</div>
+  <table class="props-table">
+    <thead>
+      <tr>
+        <th>Screen</th>
+        <th>Component</th>
+        <th>Width</th>
+        <th>Height</th>
+        <th>Border Radius</th>
+        <th>Fill</th>
+        <th>Border / Stroke</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Global Frame -->
+      <tr><td colspan="8" style="background:#333;color:#fff;font-weight:700;font-size:11px;padding:6px 12px;letter-spacing:.05em">GLOBAL LAYOUT</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Full Screen Frame</td><td>1440 px</td><td>900 px</td><td>0</td><td>#F4F6F9</td><td>—</td><td>Desktop viewport</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Top Navigation Bar</td><td>1440 px</td><td>57 px</td><td>0</td><td>#0C447C</td><td>—</td><td>Position: sticky, top: 0, z-index: 50</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Logo Icon Circle</td><td>36 px</td><td>36 px</td><td>50% (circle)</td><td>#FFFFFF</td><td>—</td><td>Inside top bar</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Portal Tab (inactive)</td><td>auto (~80 px)</td><td>32 px</td><td>6 px</td><td>transparent</td><td>1.5 px, rgba(255,255,255,.35)</td><td>Consumer / Staff / Admin tabs</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Portal Tab (active)</td><td>auto (~80 px)</td><td>32 px</td><td>6 px</td><td>#FFFFFF</td><td>1.5 px, #FFFFFF</td><td>Selected portal tab</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Sidebar</td><td>196 px</td><td>843 px</td><td>0</td><td>#FFFFFF</td><td>Right: 1 px solid #E5E9F0</td><td>Fills remaining height below top bar</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Sidebar Item (inactive)</td><td>176 px</td><td>36 px</td><td>8 px</td><td>transparent</td><td>—</td><td>Padding: 8 px 10 px; gap: 9 px</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Sidebar Item (active)</td><td>176 px</td><td>36 px</td><td>8 px</td><td>#E6F1FB</td><td>—</td><td>Color: #0C447C; font-weight: 600</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Content Area</td><td>1244 px</td><td>843 px</td><td>0</td><td>#F4F6F9</td><td>—</td><td>Padding: 22 px</td></tr>
+      <!-- Cards -->
+      <tr><td colspan="8" style="background:#333;color:#fff;font-weight:700;font-size:11px;padding:6px 12px;letter-spacing:.05em">SHARED COMPONENTS</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Card / Container</td><td>100% of content</td><td>auto</td><td>12 px</td><td>#FFFFFF</td><td>1 px solid #E5E9F0</td><td>Padding: 20 px; margin-bottom: 16 px</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Button — Primary</td><td>auto (min 80 px)</td><td>36 px</td><td>8 px</td><td>#0C447C</td><td>1.5 px solid #0C447C</td><td>Color: #FFFFFF; font-weight: 600</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Button — Default</td><td>auto (min 80 px)</td><td>36 px</td><td>8 px</td><td>#FFFFFF</td><td>1.5 px solid #D1D8E0</td><td>Color: #1A1A2E; font-weight: 600</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Button — Small</td><td>auto (min 50 px)</td><td>28 px</td><td>8 px</td><td>#FFFFFF</td><td>1.5 px solid #D1D8E0</td><td>Font-size: 12 px</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Button — Danger</td><td>auto</td><td>36 px</td><td>8 px</td><td>#FFFFFF</td><td>1.5 px solid #A32D2D</td><td>Color: #A32D2D</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Badge</td><td>auto (~70 px)</td><td>22 px</td><td>20 px</td><td>varies by state</td><td>—</td><td>Padding: 3 px 10 px; font-size: 11 px; font-weight: 700</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Form Input Field</td><td>100%</td><td>36 px</td><td>8 px</td><td>#FFFFFF</td><td>1.5 px solid #D1D8E0</td><td>Padding: 8 px 10 px; focus: #378ADD</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Textarea</td><td>100%</td><td>72 px min</td><td>8 px</td><td>#FFFFFF</td><td>1.5 px solid #D1D8E0</td><td>Resizable vertically</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Concern Checkbox Item</td><td>auto (~110 px)</td><td>34 px</td><td>8 px</td><td>#FFFFFF</td><td>1.5 px solid #D1D8E0</td><td>Padding: 6 px 12 px; hover: #EAF3F9</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Approval Signature Box</td><td>100% of col</td><td>64 px</td><td>8 px</td><td>transparent</td><td>1.5 px dashed #D1D8E0</td><td>Padding: 12 px; text-align: center</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Table Header Row</td><td>100%</td><td>32 px</td><td>0</td><td>#F0F0F0 (via th)</td><td>Bottom: 1 px solid #E5E9F0</td><td>Font-size: 11 px; font-weight: 700; uppercase</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Table Body Row</td><td>100%</td><td>40 px</td><td>0</td><td>#FFFFFF / #FAFBFD (hover)</td><td>Bottom: 1 px solid #F0F4F8</td><td>Padding: 10 px per cell</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Status Progress Bar</td><td>100%</td><td>36 px</td><td>10 px</td><td>#F9FAFC</td><td>1 px solid #E5E9F0</td><td>4 equal steps; done=#EAF4EC; active=#EBF4FD</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Stat Card</td><td>auto (1 of N cols)</td><td>80 px</td><td>12 px</td><td>#FFFFFF</td><td>1 px solid #E5E9F0</td><td>Padding: 16 px 18 px</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Divider Line</td><td>100%</td><td>1 px</td><td>0</td><td>#E5E9F0</td><td>—</td><td>Margin: 16 px 0</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Profile Avatar Circle</td><td>70 px</td><td>70 px</td><td>50% (circle)</td><td>varies (role)</td><td>—</td><td>Font-size: 26 px; font-weight: 700</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Modal Overlay</td><td>100vw</td><td>100vh</td><td>0</td><td>rgba(0,0,0,.45)</td><td>—</td><td>Fixed; z-index: 200; padding: 20 px</td></tr>
+      <tr><td><span class="screen-tag">ALL</span></td><td class="component">Modal Box</td><td>520 px</td><td>auto (max 88vh)</td><td>14 px</td><td>#FFFFFF</td><td>—</td><td>Padding: 24 px; box-shadow: 0 20 60 rgba(0,0,0,.18)</td></tr>
+      <!-- Screen-specific -->
+      <tr><td colspan="8" style="background:#333;color:#fff;font-weight:700;font-size:11px;padding:6px 12px;letter-spacing:.05em">SCREEN-SPECIFIC COMPONENTS</td></tr>
+      <tr><td><span class="screen-tag">C-1</span></td><td class="component">Concern Checkbox Group</td><td>100%</td><td>auto</td><td>—</td><td>—</td><td>—</td><td>9 items, flex-wrap, gap: 8 px</td></tr>
+      <tr><td><span class="screen-tag">C-1</span></td><td class="component">Three-Col Approval Grid</td><td>100%</td><td>auto</td><td>—</td><td>—</td><td>—</td><td>Grid: 1fr 1fr 1fr; gap: 12 px</td></tr>
+      <tr><td><span class="screen-tag">C-2</span><span class="screen-tag">S-2</span><span class="screen-tag">A-2</span></td><td class="component">Data Table</td><td>100%</td><td>auto</td><td>0</td><td>#FFFFFF</td><td>1 px solid #E5E9F0</td><td>Overflow-x: auto on wrapper</td></tr>
+      <tr><td><span class="screen-tag">C-3</span><span class="screen-tag">S-4</span><span class="screen-tag">A-5</span></td><td class="component">Two-Column Profile Layout</td><td>100%</td><td>auto</td><td>—</td><td>—</td><td>—</td><td>Grid: 1fr 1fr; gap: 16 px</td></tr>
+      <tr><td><span class="screen-tag">C-3</span><span class="screen-tag">A-5</span></td><td class="component">Notification Toggle Row</td><td>100%</td><td>32 px</td><td>0</td><td>—</td><td>Bottom: 1 px solid #F0F4F8</td><td>Checkbox toggle at right</td></tr>
+      <tr><td><span class="screen-tag">S-1</span></td><td class="component">Activity Item</td><td>100%</td><td>auto</td><td>—</td><td>—</td><td>Bottom: 1 px solid #F0F4F8</td><td>Display: flex; gap: 12 px; padding: 10 px 0</td></tr>
+      <tr><td><span class="screen-tag">S-1</span></td><td class="component">Activity Icon Circle</td><td>34 px</td><td>34 px</td><td>50%</td><td>varies</td><td>—</td><td>SVG icon inside</td></tr>
+      <tr><td><span class="screen-tag">S-3</span><span class="screen-tag">A-3</span></td><td class="component">Request Update Card</td><td>100%</td><td>auto</td><td>12 px</td><td>#FFFFFF</td><td>1 px solid #E5E9F0</td><td>Contains findings + action taken textareas</td></tr>
+      <tr><td><span class="screen-tag">A-1</span></td><td class="component">Bar Chart Container</td><td>100%</td><td>100 px</td><td>0</td><td>transparent</td><td>—</td><td>Flex; align-items: flex-end; gap: 8 px</td></tr>
+      <tr><td><span class="screen-tag">A-1</span></td><td class="component">Progress Bar Track</td><td>100%</td><td>7 px</td><td>10 px</td><td>#F0F4F8</td><td>—</td><td>Overflow: hidden</td></tr>
+      <tr><td><span class="screen-tag">A-1</span></td><td class="component">Progress Bar Fill</td><td>varies (%)</td><td>7 px</td><td>10 px</td><td>varies by status</td><td>—</td><td>Width driven by data value</td></tr>
+      <tr><td><span class="screen-tag">A-1</span></td><td class="component">Satisfaction Rate Display</td><td>auto</td><td>auto</td><td>—</td><td>—</td><td>—</td><td>Large number (36 px bold) + label; flex layout</td></tr>
+      <tr><td><span class="screen-tag">C-2</span></td><td class="component">Satisfaction Option (Yes/No)</td><td>100%</td><td>40 px</td><td>8 px</td><td>#FAFAFA</td><td>1.5 px solid #D1D8E0</td><td>Selected-yes: #D4EDDA/#155724; no: #F8D7DA/#721c24</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
